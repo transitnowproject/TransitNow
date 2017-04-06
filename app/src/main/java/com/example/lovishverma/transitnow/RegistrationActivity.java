@@ -18,20 +18,15 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         btnRegister= (Button) findViewById(R.id.btnRegister);
-        btnLinkToLoginScreen= (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        btnLinkToLoginScreen= (Button) findViewById(R.id.btnLogin);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btnLinkToLoginScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 }

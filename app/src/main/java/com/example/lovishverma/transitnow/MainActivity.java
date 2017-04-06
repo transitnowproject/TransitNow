@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(MainActivity.this,"welcome here ",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(MainActivity.this,Registration2Activity.class);
+                Intent i = new Intent(MainActivity.this,RegistrationActivity.class);
                 startActivity(i);
             }
         });
