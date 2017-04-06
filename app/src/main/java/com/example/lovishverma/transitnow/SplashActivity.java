@@ -26,9 +26,5 @@ public class SplashActivity extends AppCompatActivity {
         t.start();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+
 }

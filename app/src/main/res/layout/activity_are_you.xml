@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white1"
-    tools:context="com.example.lovishverma.transitnow.MainActivity">
-
+    tools:context="com.example.lovishverma.transitnow.AreYouActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -32,6 +30,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/imgBtnDriver"
         app:srcCompat="@drawable/passenger_icon1" />
-
 
 </RelativeLayout>

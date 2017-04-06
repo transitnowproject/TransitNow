@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLinkToRegisterScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this,Registration2Activity.class);
                 startActivity(intent);
             }
         });
