@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btnLogin,btnLinkToRegisterScreen;
+    private Button btnLogin;
 
 
     @Override
@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btnLogin= (Button) findViewById(R.id.btnLogin);
-        btnLinkToRegisterScreen= (Button) findViewById(R.id.btnLinkToRegisterScreen);
+       // btnLinkToRegisterScreen= (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,12 +26,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnLinkToRegisterScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
-                startActivity(intent);
-            }
-        });
+//        btnLinkToRegisterScreen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

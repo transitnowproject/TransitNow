@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_register"
     android:gravity="center"
-    android:padding="10dp" >
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,11 +28,50 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/input_register_bg"
+                android:text="Male"
+                android:textColor="@color/input_register_hint" />
+
+            <Button
+                android:id="@+id/btnFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+
+                android:background="@color/input_register_bg"
+                android:text="Female"
+                android:textColor="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/edtDOB"
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="DOB"
+                android:layout_marginLeft="10dp"
+                android:background="@color/input_register_bg"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:background="@color/input_register_bg"
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
