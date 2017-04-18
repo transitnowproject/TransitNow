@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_register"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <LinearLayout
@@ -23,6 +23,47 @@
             android:background="@color/input_register_bg"
             android:hint="@string/hint_name"
             android:inputType="textCapWords"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="Address"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+
+
+        <EditText
+            android:id="@+id/mobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="Mobile Number"
+            android:inputType="text|phone"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="Username"
+            android:inputType="text"
             android:maxLines="1"
             android:padding="10dp"
             android:textColor="@color/input_register"
@@ -78,4 +119,6 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
     </LinearLayout>
+
+
 </LinearLayout>

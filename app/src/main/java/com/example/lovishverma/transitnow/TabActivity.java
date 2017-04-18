@@ -46,7 +46,7 @@ public class TabActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Toast.makeText(TabActivity.this,"TAB",Toast.LENGTH_LONG).show();
+               // Toast.makeText(TabActivity.this,"TAB",Toast.LENGTH_LONG).show();
             }
 
             @Override

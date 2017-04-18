@@ -51,18 +51,18 @@
             android:text="@string/btn_login"
             android:textColor="@color/btn_login" />
 
-        <!-- Link to Login Screen -->
+        <!--&lt;!&ndash; Link to Login Screen &ndash;&gt;-->
 
-        <Button
-            android:id="@+id/btnLinkToRegisterScreen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
-            android:background="@null"
-            android:text="@string/btn_link_to_register"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+        <!--<Button-->
+            <!--android:id="@+id/btnLinkToRegisterScreen"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="40dip"-->
+            <!--android:background="@null"-->
+            <!--android:text="@string/btn_link_to_register"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="15sp" />-->
     </LinearLayout>
 
 </LinearLayout>
