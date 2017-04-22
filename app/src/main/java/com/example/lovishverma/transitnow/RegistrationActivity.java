@@ -11,7 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import static com.example.lovishverma.transitnow.R.id.btnLinkToRegisterScreen;
+//import static com.example.lovishverma.transitnow.R.id.btnLinkToRegisterScreen;
 
 public class RegistrationActivity extends AppCompatActivity {
 
