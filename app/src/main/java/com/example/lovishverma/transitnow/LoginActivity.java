@@ -1,6 +1,7 @@
 package com.example.lovishverma.transitnow;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btnLogin;
+    private Button btnLogin,btnForgotPassword;
     private EditText edtEmail, edtPassword;
 
 
@@ -23,7 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
-        // btnLinkToRegisterScreen= (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        btnForgotPassword = (Button) findViewById(R.id.forgotPassword);
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,8 +40,20 @@ public class LoginActivity extends AppCompatActivity {
                     edtPassword.setError("Invalid Password");
                 }
 
+                Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
+                startActivity(intent);
+
+
             }
 
+        });
+
+        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.gmail.com"));
+                startActivity(intent);
+            }
         });
 
     }
@@ -64,12 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-//        btnLinkToRegisterScreen.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
 }
 

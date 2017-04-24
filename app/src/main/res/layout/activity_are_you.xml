@@ -27,18 +27,18 @@
         android:id="@+id/imgBtnDriver"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginTop="23dp"
+        app:srcCompat="@drawable/driver_icon1"
         android:layout_below="@+id/txtAreYou"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/driver_icon1" />
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/imgBtnPassenger"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_alignLeft="@+id/imgBtnDriver"
-        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/passenger_icon1"
+        android:layout_below="@+id/imgBtnDriver"
         android:layout_alignStart="@+id/imgBtnDriver"
-        app:srcCompat="@drawable/passenger_icon1" />
+        android:layout_marginTop="31dp" />
 
 </RelativeLayout>

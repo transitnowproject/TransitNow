@@ -21,9 +21,9 @@ import android.widget.Toast;
 public class FragmentTwo extends android.support.v4.app.Fragment {
 
     private Button btnRegister;
-    //private btnMale, btnFemale;
+    private Button btnMale, btnFemale;
     //private EditText edtDOB;
-    //private RadioGroup radioGroup;
+    private RadioGroup radioGroup;
 
     @Nullable
     @Override
@@ -32,9 +32,9 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
 //        edtDOB = (EditText) view.findViewById(R.id.edtDOB);
-//        btnMale = (Button) view.findViewById(R.id.btnMale);
-//        btnFemale = (Button) view.findViewById(R.id.btnFemale);
-//        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        btnMale = (Button) view.findViewById(R.id.btnMale);
+        btnFemale = (Button) view.findViewById(R.id.btnFemale);
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,19 +43,19 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
             }
         });
 
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, @IdRes int i) {
-//                switch (i) {
-//                    case R.id.btnMale:
-//                        btnFemale.setEnabled(false);
-//                        break;
-//                    case R.id.btnFemale:
-//                        btnMale.setEnabled(false);
-//                        break;
-//                }
-//            }
-//        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int i) {
+                switch (i) {
+                    case R.id.btnMale:
+                        btnFemale.setEnabled(false);
+                        break;
+                    case R.id.btnFemale:
+                        btnMale.setEnabled(false);
+                        break;
+                }
+            }
+        });
 
 //        btnMale.setOnClickListener(new View.OnClickListener() {
 //            @Override
