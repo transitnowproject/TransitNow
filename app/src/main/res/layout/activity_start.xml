@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
    android:gravity="center"
-    android:background="@color/bg_register"
+    android:background="@color/bg_login"
     tools:context="com.example.lovishverma.transitnow.StartActivity">
 
     <ImageView
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:text="Welcome"
         android:textColor="@color/white"
         android:typeface="serif"
@@ -30,7 +30,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="160dp"
             android:text="Start"
             android:id="@+id/btnStart"
             android:background="#FF180C00"

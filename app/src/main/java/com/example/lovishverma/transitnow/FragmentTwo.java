@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -21,9 +22,10 @@ import android.widget.Toast;
 public class FragmentTwo extends android.support.v4.app.Fragment {
 
     private Button btnRegister;
-    private Button btnMale, btnFemale;
+    // private Button btnMale, btnFemale;
     //private EditText edtDOB;
     private RadioGroup radioGroup;
+    private RadioButton male, female;
 
     @Nullable
     @Override
@@ -32,9 +34,11 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
 //        edtDOB = (EditText) view.findViewById(R.id.edtDOB);
-        btnMale = (Button) view.findViewById(R.id.btnMale);
-        btnFemale = (Button) view.findViewById(R.id.btnFemale);
+//        btnMale = (Button) view.findViewById(R.id.btnMale);
+//        btnFemale = (Button) view.findViewById(R.id.btnFemale);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        male = (RadioButton) view.findViewById(R.id.male);
+        female = (RadioButton) view.findViewById(R.id.female);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,18 +48,47 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
         });
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int i) {
-                switch (i) {
-                    case R.id.btnMale:
-                        btnFemale.setEnabled(false);
-                        break;
-                    case R.id.btnFemale:
-                        btnMale.setEnabled(false);
-                        break;
+
+                switch (i)
+                {
+                    case R.id.male:
+                                        break;
+                    case R.id.female:
+                                        break;
                 }
+
             }
         });
+
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, @IdRes int i) {
+//                switch (i) {
+//                    case R.id.btnMale:
+//                        btnMale.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                btnFemale.setEnabled(false);
+//                                btnFemale.setClickable(false);
+//
+//                            }
+//                        });
+//                        break;
+//                    case R.id.btnFemale:
+//                        btnFemale.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                btnMale.setEnabled(false);
+//                                btnMale.setClickable(false);
+//                            }
+//                        });
+//                        break;
+//                }
+//            }
+//        });
 
 //        btnMale.setOnClickListener(new View.OnClickListener() {
 //            @Override

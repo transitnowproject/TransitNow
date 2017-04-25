@@ -28,37 +28,51 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
+        <!--<RadioGroup-->
+            <!--android:id="@+id/radioGroup"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnMale"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/input_register_bg"-->
+                <!--android:text="Male"-->
+                <!--android:textColor="@color/white" />-->
+            <!--<Button-->
+                <!--android:id="@+id/btnFemale"-->
+                <!--android:layout_width="160dp"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/input_register_bg"-->
+                <!--android:text="Female"-->
+                <!--android:textColor="@color/white" />-->
+
+        <!--</RadioGroup>-->
         <RadioGroup
-            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/radioGroup"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnMale"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+            <RadioButton
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:id="@+id/male"
+                android:text="  Male"
                 android:background="@color/input_register_bg"
-                android:text="Male"
-                android:textColor="@color/input_register"
-
-                />
-
-
-            <Button
-                android:id="@+id/btnFemale"
-                android:layout_width="150dp"
-                android:layout_marginLeft="15dp"
-                android:layout_height="wrap_content"
+                android:textColor="@color/white"   />
+            <RadioButton
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/female"
+                android:text="  Female"
                 android:background="@color/input_register_bg"
-                android:text="Female"
-                android:textColor="@color/input_register"
-
-                />
-
+                android:textColor="@color/white"   />
 
         </RadioGroup>
-
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
@@ -139,16 +153,16 @@
 
         <!-- Link to Login Screen -->
 
-        <Button
-            android:id="@+id/btnLinkToLoginScreen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
-            android:background="@null"
-            android:text="@string/btn_link_to_login"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+        <!--<Button-->
+            <!--android:id="@+id/btnLinkToLoginScreen"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="40dip"-->
+            <!--android:background="@null"-->
+            <!--android:text="@string/btn_link_to_login"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="15sp" />-->
     </LinearLayout>
 
 

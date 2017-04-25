@@ -3,41 +3,41 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/navNormalMap"
+            android:icon="@drawable/map1"
             android:title="Normal Map" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/navHybridMap"
+            android:icon="@drawable/map"
             android:title="Hybrid Map" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/navLoc"
+            android:icon="@drawable/loc5"
             android:title="My location" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/navBusLoc"
+            android:icon="@drawable/bus_locc"
             android:title="Bus Location" />
         <item
-            android:id="@+id/nav_manage1"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/navBusStop"
+            android:icon="@drawable/bus_stopp"
             android:title="Nearest Stop" />
         <item
-            android:id="@+id/nav_manage2"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/navReminder"
+            android:icon="@drawable/rem"
             android:title="Set Reminder" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/navShare"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/navInviteFriend"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Invite Friend" />
         </menu>
     </item>
 

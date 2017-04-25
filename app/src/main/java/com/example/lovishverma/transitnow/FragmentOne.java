@@ -38,8 +38,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent= new Intent(getActivity(),DashboardActivity.class);
-//                startActivity(intent);
+
                 final String email = edtEmail.getText().toString();
                 if (!isValidEmail(email)) {
                     edtEmail.setError("Invalid Email");
@@ -53,6 +52,9 @@ public class FragmentOne extends android.support.v4.app.Fragment {
                 {
                     edtPassword.setError("Password contains atleast 6 characters");
                 }
+
+                Intent intent= new Intent(getActivity(),DashboardActivity.class);
+                startActivity(intent);
             }
         });
 
