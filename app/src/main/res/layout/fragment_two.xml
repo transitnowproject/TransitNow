@@ -16,7 +16,7 @@
         android:paddingRight="20dp">
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -28,29 +28,49 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
-        <!--<RadioGroup-->
-            <!--android:id="@+id/radioGroup"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal">-->
 
-            <!--<Button-->
-                <!--android:id="@+id/btnMale"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@color/input_register_bg"-->
-                <!--android:text="Male"-->
-                <!--android:textColor="@color/white" />-->
-            <!--<Button-->
-                <!--android:id="@+id/btnFemale"-->
-                <!--android:layout_width="160dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@color/input_register_bg"-->
-                <!--android:text="Female"-->
-                <!--android:textColor="@color/white" />-->
 
-        <!--</RadioGroup>-->
+        <EditText
+            android:id="@+id/edtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="Address"
+            android:inputType="text"
+
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+        <EditText
+            android:id="@+id/edtEmailId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
+
+        <EditText
+            android:id="@+id/edtMobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="Mobile Number"
+            android:inputType="text|phone"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint" />
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,39 +93,13 @@
                 android:textColor="@color/white"   />
 
         </RadioGroup>
+
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/edtUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
-            android:hint="Address"
-            android:inputType="text"
             android:layout_marginTop="10dp"
-            android:maxLines="1"
-            android:padding="10dp"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-
-        <EditText
-            android:id="@+id/mobileNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
-            android:hint="Mobile Number"
-            android:inputType="text|phone"
-            android:maxLines="1"
-            android:padding="10dp"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
-
-        <EditText
-            android:id="@+id/userName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:background="@color/input_register_bg"
             android:hint="Username"
             android:inputType="text"
@@ -114,21 +108,10 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:padding="10dp"
-            android:textColor="@color/input_register"
-            android:textColorHint="@color/input_register_hint" />
+
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -151,18 +134,7 @@
             android:text="@string/btn_register"
             android:textColor="@color/white" />
 
-        <!-- Link to Login Screen -->
 
-        <!--<Button-->
-            <!--android:id="@+id/btnLinkToLoginScreen"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="40dip"-->
-            <!--android:background="@null"-->
-            <!--android:text="@string/btn_link_to_login"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="15sp" />-->
     </LinearLayout>
 
 

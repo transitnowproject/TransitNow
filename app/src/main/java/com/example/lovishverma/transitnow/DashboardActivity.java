@@ -3,6 +3,7 @@ package com.example.lovishverma.transitnow;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +14,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.lovishverma.fragments.BusLocFragment;
+import com.example.lovishverma.fragments.HybridFragment;
+import com.example.lovishverma.fragments.InviteFriendFragment;
+import com.example.lovishverma.fragments.MainFragment;
+import com.example.lovishverma.fragments.MapFragment;
+import com.example.lovishverma.fragments.MyLocFragment;
+import com.example.lovishverma.fragments.NearestStopFragment;
+import com.example.lovishverma.fragments.SetReminderFragment;
+import com.example.lovishverma.fragments.ShareFragment;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+
+    SupportMapFragment sMapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_dashboard);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +58,12 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+
+        sMapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -70,6 +94,9 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.my_profile) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -77,31 +104,55 @@ public class DashboardActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (sMapFragment.isAdded())
+            sFm.beginTransaction().hide(sMapFragment).commit();
+
+
         if (id == R.id.navNormalMap) {
-            // Handle the camera action
+           // fm.beginTransaction().replace(R.id.content_frame, new MapFragment()).commit();
+
+            if (!sMapFragment.isAdded())
+                sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
+            else
+                sFm.beginTransaction().show(sMapFragment).commit();
+
         } else if (id == R.id.navHybridMap) {
 
+            fm.beginTransaction().replace(R.id.content_frame, new HybridFragment()).commit();
+
         } else if (id == R.id.navLoc) {
+            fm.beginTransaction().replace(R.id.content_frame, new MyLocFragment()).commit();
 
         } else if (id == R.id.navBusLoc) {
+            fm.beginTransaction().replace(R.id.content_frame, new BusLocFragment()).commit();
 
         } else if (id == R.id.navBusStop) {
-
+            fm.beginTransaction().replace(R.id.content_frame, new NearestStopFragment()).commit();
         }
         else if (id == R.id.navReminder) {
-
+            fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
         }
         else if (id == R.id.navShare) {
+            fm.beginTransaction().replace(R.id.content_frame, new ShareFragment()).commit();
 
         } else if (id == R.id.navInviteFriend) {
-
+            fm.beginTransaction().replace(R.id.content_frame, new InviteFriendFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //Add locations and markers here
     }
 }

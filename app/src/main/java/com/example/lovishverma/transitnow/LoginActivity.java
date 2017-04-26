@@ -2,11 +2,23 @@ package com.example.lovishverma.transitnow;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.lovishverma.APIConfiguration.ApiConfiguration;
+import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
+import com.example.lovishverma.HttpRequestProcessor.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +26,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin,btnForgotPassword;
     private EditText edtEmail, edtPassword;
+    private String UserName, Password;
+    private HttpRequestProcessor httpRequestProcessor;
+    private Response response;
+    private ApiConfiguration apiConfiguration;
+    private String baseURL, urlLogin, jsonStringToPost, jsonResponseString;
+    private boolean success;
+    private String message;
 
 
     @Override
@@ -26,10 +45,24 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         btnForgotPassword = (Button) findViewById(R.id.forgotPassword);
 
+        //Initialization
+        httpRequestProcessor = new HttpRequestProcessor();
+        response = new Response();
+        apiConfiguration = new ApiConfiguration();
+
+        //Getting base url
+        baseURL = apiConfiguration.getApi();
+        urlLogin = baseURL + "AccountAPI/GetLoginUser";
+
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Getting UserName and password
+                UserName = edtEmail.getText().toString();
+                Password = edtPassword.getText().toString();
 
                 final String email = edtEmail.getText().toString();
                 if (!isValidEmail(email)) {
@@ -39,9 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!isValidPassword(password)) {
                     edtPassword.setError("Invalid Password");
                 }
+                new LoginTask().execute(email, Password);
 
-                Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
-                startActivity(intent);
 
 
             }
@@ -57,6 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private boolean isValidEmail(String email) {
 
@@ -78,6 +112,57 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public class LoginTask extends AsyncTask<String, String, String> {
 
+
+        @Override
+        protected String doInBackground(String... params) {
+            UserName = params[0];
+            Password = params[1];
+
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("UserName", UserName);
+                jsonObject.put("Password", Password);
+
+                jsonStringToPost = jsonObject.toString();
+                response = httpRequestProcessor.pOSTRequestProcessor(jsonStringToPost, urlLogin);
+                jsonResponseString = response.getJsonResponseString();
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonResponseString;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            //Log.d("Response String", s);
+
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                success = jsonObject.getBoolean("success");
+                Log.d("Success", String.valueOf(success));
+                message = jsonObject.getString("message");
+                Log.d("message", message);
+
+                if (success) {
+                    JSONArray response = jsonObject.getJSONArray("response");
+                    Toast.makeText(LoginActivity.this, "User Authenticated", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid UserName & Password", Toast.LENGTH_LONG).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
 
