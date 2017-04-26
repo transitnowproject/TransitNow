@@ -31,13 +31,13 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/navShare"
+                android:id="@+id/navAboutUs"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="About Us" />
             <item
-                android:id="@+id/navInviteFriend"
+                android:id="@+id/navFeedBack"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Invite Friend" />
+                android:title="FeedBack" />
         </menu>
     </item>
 

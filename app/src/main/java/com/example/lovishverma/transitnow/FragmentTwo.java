@@ -33,7 +33,8 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
     private Button btnRegister;
     private RadioGroup radioGroup;
     private RadioButton male, female;
-    private String Name, Address, EmailId, MobileNo, UserName, Password;
+    private int Option;
+    private String Name, Address, EmailId, MobileNo, Gender, UserName, Password;
     private EditText edtName, edtAddress, edtEmailId, edtMobileNo, edtUserName, edtPassword;
     private HttpRequestProcessor httpRequestProcessor;
     private Response response;
@@ -78,6 +79,8 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                 Address = edtAddress.getText().toString();
                 EmailId = edtEmailId.getText().toString();
                 MobileNo = edtMobileNo.getText().toString();
+                Option = radioGroup.getCheckedRadioButtonId();
+                Gender = String.valueOf(Option);
                 UserName = edtUserName.getText().toString();
                 Password = edtPassword.getText().toString();
                 new RegistrationTask().execute(Name, Address, EmailId, MobileNo, UserName, Password);
@@ -111,8 +114,9 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
             Log.e("Address", Address);
             EmailId = params[2];
             MobileNo = params[3];
-            UserName = params[4];
-            Password = params[5];
+            Gender = params[4];
+            UserName = params[5];
+            Password = params[6];
 
             JSONObject jsonObject = new JSONObject();
             try {
@@ -120,7 +124,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                 jsonObject.put("Address", Address);
                 jsonObject.put("EmailId", EmailId);
                 jsonObject.put("MobileNo", MobileNo);
-                jsonObject.put("Gender", "M");
+                jsonObject.put("Gender", Gender);
                 jsonObject.put("DateOfBirth", "2011-10-04");
                 jsonObject.put("FatherName", "ABC ");
                 jsonObject.put("MotherName", "xyz ");

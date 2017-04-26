@@ -18,6 +18,7 @@ import com.example.lovishverma.fragments.BusLocFragment;
 import com.example.lovishverma.fragments.HybridFragment;
 import com.example.lovishverma.fragments.InviteFriendFragment;
 import com.example.lovishverma.fragments.MainFragment;
+import com.example.lovishverma.fragments.MapFragment;
 import com.example.lovishverma.fragments.MyLocFragment;
 import com.example.lovishverma.fragments.NearestStopFragment;
 import com.example.lovishverma.fragments.SetReminderFragment;
@@ -58,8 +59,11 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+//        FragmentManager fm = getSupportFragmentManager();
+//        fm.beginTransaction().replace(R.id.content_frame, new MapFragment()).commit();
+        android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
+        sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
+
 
         sMapFragment.getMapAsync(this);
 
@@ -68,6 +72,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -138,10 +143,10 @@ public class DashboardActivity extends AppCompatActivity
         else if (id == R.id.navReminder) {
             fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
         }
-        else if (id == R.id.navShare) {
+        else if (id == R.id.navAboutUs) {
             fm.beginTransaction().replace(R.id.content_frame, new ShareFragment()).commit();
 
-        } else if (id == R.id.navInviteFriend) {
+        } else if (id == R.id.navFeedBack) {
             fm.beginTransaction().replace(R.id.content_frame, new InviteFriendFragment()).commit();
         }
 
