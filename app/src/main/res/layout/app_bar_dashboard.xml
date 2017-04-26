@@ -26,9 +26,11 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="10dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="450dp"
+        app:backgroundTint="@color/input_login_hint"
+        app:srcCompat="@drawable/location" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -43,30 +45,31 @@
             android:id="@+id/hme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:text="Home"
-            android:typeface="sans"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"/>
+            android:textStyle="bold"
+            android:typeface="sans" />
+
         <Button
             android:id="@+id/ab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:text="Profile"
-            android:typeface="sans"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"/>
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <Button
             android:id="@+id/signOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:text="SignOut"
-            android:textStyle="bold"
-            android:typeface="sans"
             android:textColor="@color/colorPrimaryDark"
-            android:background="@color/colorPrimary"/>
+            android:textStyle="bold"
+            android:typeface="sans" />
     </android.support.v7.widget.Toolbar>
 
 

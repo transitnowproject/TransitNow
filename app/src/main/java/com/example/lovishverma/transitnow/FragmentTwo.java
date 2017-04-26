@@ -84,7 +84,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                 UserName = edtUserName.getText().toString();
                 Password = edtPassword.getText().toString();
                 new RegistrationTask().execute(Name, Address, EmailId, MobileNo, Gender, UserName, Password);
-                Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -162,8 +162,8 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
                 if (responseData == 1) {
                     Toast.makeText(getActivity(), "Data Registered Successfully", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getActivity(), FragmentOne.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getActivity(), FragmentOne.class);
+//                    startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), "Registration Unsuccessful", Toast.LENGTH_LONG).show();
                 }
