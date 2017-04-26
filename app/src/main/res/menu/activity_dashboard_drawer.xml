@@ -35,9 +35,9 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="About Us" />
             <item
-                android:id="@+id/navFeedBack"
+                android:id="@+id/navRateUs"
                 android:icon="@drawable/ic_menu_send"
-                android:title="FeedBack" />
+                android:title="Rate Us" />
         </menu>
     </item>
 

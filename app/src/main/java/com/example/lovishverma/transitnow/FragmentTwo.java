@@ -83,7 +83,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                 Gender = String.valueOf(Option);
                 UserName = edtUserName.getText().toString();
                 Password = edtPassword.getText().toString();
-                new RegistrationTask().execute(Name, Address, EmailId, MobileNo, UserName, Password);
+                new RegistrationTask().execute(Name, Address, EmailId, MobileNo, Gender, UserName, Password);
                 Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_LONG).show();
             }
         });
@@ -96,6 +96,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                 switch (i) {
                     case R.id.male:
                         break;
+
                     case R.id.female:
                         break;
                 }
