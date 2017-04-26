@@ -18,7 +18,6 @@ import com.example.lovishverma.fragments.BusLocFragment;
 import com.example.lovishverma.fragments.HybridFragment;
 import com.example.lovishverma.fragments.InviteFriendFragment;
 import com.example.lovishverma.fragments.MainFragment;
-import com.example.lovishverma.fragments.MapFragment;
 import com.example.lovishverma.fragments.MyLocFragment;
 import com.example.lovishverma.fragments.NearestStopFragment;
 import com.example.lovishverma.fragments.SetReminderFragment;
@@ -123,7 +122,7 @@ public class DashboardActivity extends AppCompatActivity
             else
                 sFm.beginTransaction().show(sMapFragment).commit();
 
-        } else if (id == R.id.navHybridMap) {
+        } else if (id == R.id.navShowTraffic) {
 
             fm.beginTransaction().replace(R.id.content_frame, new HybridFragment()).commit();
 
