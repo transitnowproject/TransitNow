@@ -5,16 +5,15 @@
     android:background="@color/bg_login">
 
     <Spinner
+        android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="50sp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner"
-        android:background="#FF180C00"
         android:layout_marginLeft="5dp"
-        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/input_register_hint"
         android:entries="@array/Drivers"
-        >
+        android:textColor="@color/white">
 
     </Spinner>
     <Button

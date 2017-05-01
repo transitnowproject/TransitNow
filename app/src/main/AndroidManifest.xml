@@ -43,7 +43,10 @@
 
         <activity android:name=".AdminActivity" />
         <activity android:name=".AssocMemActivity" />
-        <activity android:name=".DriverActivity"></activity>
+        <activity android:name=".DriverActivity" />
+        <activity android:name=".DriverDashboard" />
+        <activity android:name="com.example.lovishverma.fragments.DriverFragment1" />
+        <activity android:name="com.example.lovishverma.fragments.DriverFragment2"></activity>
     </application>
 
 </manifest>
