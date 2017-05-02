@@ -42,27 +42,37 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
-            android:id="@+id/hme"
+            android:id="@+id/btnShowLoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Home"
+            android:text="Show loc"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:typeface="sans" />
 
         <Button
-            android:id="@+id/ab"
+            android:id="@+id/btnListedMembers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Profile"
+            android:text="listed members"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:typeface="sans" />
 
         <Button
-            android:id="@+id/signOut"
+            android:id="@+id/btnSaveLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="save loc"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <Button
+            android:id="@+id/btnSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"

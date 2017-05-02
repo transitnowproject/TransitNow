@@ -7,9 +7,9 @@
             android:icon="@drawable/normal_map"
             android:title="Normal Map" />
         <item
-            android:id="@+id/navShowTraffic"
+            android:id="@+id/navListedMembers"
             android:icon="@drawable/traffic"
-            android:title="Show Traffic" />
+            android:title="Listed Members" />
         <item
             android:id="@+id/navLoc"
             android:icon="@drawable/loc5"

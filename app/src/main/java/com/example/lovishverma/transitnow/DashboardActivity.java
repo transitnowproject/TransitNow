@@ -1,9 +1,12 @@
 package com.example.lovishverma.transitnow;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +16,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.lovishverma.APIConfiguration.ApiConfiguration;
+import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
+import com.example.lovishverma.HttpRequestProcessor.Response;
 import com.example.lovishverma.fragments.BusLocFragment;
-import com.example.lovishverma.fragments.HybridFragment;
+import com.example.lovishverma.fragments.ListedMembersFragment;
 import com.example.lovishverma.fragments.InviteFriendFragment;
 import com.example.lovishverma.fragments.MyLocFragment;
 import com.example.lovishverma.fragments.NearestStopFragment;
@@ -25,10 +33,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
     SupportMapFragment sMapFragment;
+    private Button btnSaveLoc,btnSignOut,btnShowLoc,btnListedMembers;
+    private HttpRequestProcessor httpRequestProcessor;
+    private Response response;
+    private ApiConfiguration apiConfiguration;
+    private String baseURL, urlRegister;
+    private String jsonPostString, jsonResponseString;
+    private int responseData;
+    private boolean success;
+    private String MemberId,Title,Description,DDate,Longitude,Latitude,Place;
+    private String message;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +59,40 @@ public class DashboardActivity extends AppCompatActivity
         sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_dashboard);
 
+        btnSaveLoc= (Button) findViewById(R.id.btnSaveLoc);
+        btnShowLoc= (Button) findViewById(R.id.btnShowLoc);
+        btnSignOut= (Button) findViewById(R.id.btnSignOut);
+        btnListedMembers= (Button) findViewById(R.id.btnListedMembers);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Initialization
+        httpRequestProcessor = new HttpRequestProcessor();
+        response = new Response();
+        apiConfiguration = new ApiConfiguration();
+
+        //Getting BaseURL
+        baseURL = apiConfiguration.getApi();
+        urlRegister = baseURL + "TrackMyPosition/SaveMyCurrentPosition";
+        Log.e("url", urlRegister);
+
+        btnSaveLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new RegistrationTask().execute(MemberId,Title,Description,DDate,Longitude,Latitude,Place);
+
+            }
+        });
+
+        btnListedMembers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this,MemberListedActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +122,74 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
+    private class RegistrationTask extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            MemberId = params[0];
+            Title = params[1];
+            Description = params[2];
+            DDate = params[3];
+            Longitude = params[4];
+            Latitude = params[5];
+            Place = params[6];
+
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("MemberId", MemberId);
+                jsonObject.put("Title", Title);
+                jsonObject.put("Description", Description);
+                jsonObject.put("DDate", DDate);
+                jsonObject.put("Longitude", Longitude);
+                jsonObject.put("Latitude", Latitude);
+                jsonObject.put("Place", Place);
+
+
+                jsonPostString = jsonObject.toString();
+                Log.e("jsonPostString", jsonPostString);
+                response = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, urlRegister);
+                jsonResponseString = response.getJsonResponseString();
+                Log.e("jsonResponseString", jsonResponseString);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonResponseString;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            // Log.d("Response String", s);
+
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                success = jsonObject.getBoolean("success");
+                Log.d("Success", String.valueOf(success));
+
+                responseData = jsonObject.getInt("responseData");
+                // Log.d("message", message);
+                message = jsonObject.getString("message");
+                Log.d("message", message);
+
+
+
+
+                if (responseData == 1) {
+                    Toast.makeText(DashboardActivity.this, "Records saved successfully !!", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(getActivity(), FragmentOne.class);
+//                    startActivity(intent);
+                } else {
+                    Toast.makeText(DashboardActivity.this, "Records Saved Unsuccessfully", Toast.LENGTH_LONG).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -125,9 +248,9 @@ public class DashboardActivity extends AppCompatActivity
             else
                 sFm.beginTransaction().show(sMapFragment).commit();
 
-        } else if (id == R.id.navShowTraffic) {
+        } else if (id == R.id.navListedMembers) {
 
-            fm.beginTransaction().replace(R.id.content_frame, new HybridFragment()).commit();
+            fm.beginTransaction().replace(R.id.content_frame, new ListedMembersFragment()).commit();
 
         } else if (id == R.id.navLoc) {
             fm.beginTransaction().replace(R.id.content_frame, new MyLocFragment()).commit();

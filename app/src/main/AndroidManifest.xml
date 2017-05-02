@@ -46,7 +46,8 @@
         <activity android:name=".DriverActivity" />
         <activity android:name=".DriverDashboard" />
         <activity android:name="com.example.lovishverma.fragments.DriverFragment1" />
-        <activity android:name="com.example.lovishverma.fragments.DriverFragment2"></activity>
+        <activity android:name="com.example.lovishverma.fragments.DriverFragment2" />
+        <activity android:name=".MemberListedActivity"></activity>
     </application>
 
 </manifest>

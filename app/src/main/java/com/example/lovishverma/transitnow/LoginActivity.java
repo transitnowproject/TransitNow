@@ -19,9 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin,btnForgotPassword;
@@ -32,7 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private ApiConfiguration apiConfiguration;
     private String baseURL, urlLogin, jsonStringToPost, jsonResponseString;
     private boolean success;
-    private String message;
+    private String ErrorMessage;
+
 
 
     @Override
@@ -64,15 +62,15 @@ public class LoginActivity extends AppCompatActivity {
                 UserName = edtEmail.getText().toString();
                 Password = edtPassword.getText().toString();
 
-                final String email = edtEmail.getText().toString();
-                if (!isValidEmail(email)) {
-                    edtEmail.setError("Invalid Email");
-                }
-                final String password = edtPassword.getText().toString();
-                if (!isValidPassword(password)) {
-                    edtPassword.setError("Invalid Password");
-                }
-                new LoginTask().execute(email, Password);
+//                final String email = edtEmail.getText().toString();
+//                if (!isValidEmail(email)) {
+//                    edtEmail.setError("Invalid Email");
+//                }
+//                final String password = edtPassword.getText().toString();
+//                if (!isValidPassword(password)) {
+//                    edtPassword.setError("Invalid Password");
+//                }
+                new LoginTask().execute(UserName, Password);
 
 
 
@@ -92,25 +90,25 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    private boolean isValidEmail(String email) {
-
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-
-
-    }
-
-    private boolean isValidPassword(String password) {
-        if (password != null && password.length() > 6) {
-            return true;
-        }
-        return false;
-
-    }
+//    private boolean isValidEmail(String email) {
+//
+//        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//
+//        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+//        Matcher matcher = pattern.matcher(email);
+//        return matcher.matches();
+//
+//
+//    }
+//
+//    private boolean isValidPassword(String password) {
+//        if (password != null && password.length() > 6) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
 
     public class LoginTask extends AsyncTask<String, String, String> {
 
@@ -145,17 +143,26 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
                 success = jsonObject.getBoolean("success");
                 Log.d("Success", String.valueOf(success));
-                message = jsonObject.getString("message");
-                Log.d("message", message);
+                ErrorMessage = jsonObject.getString("ErrorMessage");
+                Log.d("ErrorMessage", ErrorMessage);
 
-                if (success) {
-                    JSONArray response = jsonObject.getJSONArray("response");
-                    Toast.makeText(LoginActivity.this, "User Authenticated", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Invalid UserName & Password", Toast.LENGTH_LONG).show();
+                if(ErrorMessage.equals("User Authenticated!!"))
+                {
+                    Toast.makeText(LoginActivity.this,"success",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
                 }
+                else if(ErrorMessage.equals("Invalid username!!"))
+                {
+                    Toast.makeText(LoginActivity.this,"Enter Valid UserName",Toast.LENGTH_LONG).show();
+                }
+                else if(ErrorMessage.equals("Invalid password!!"))
+                {
+                    Toast.makeText(LoginActivity.this,"Enter Valid Password",Toast.LENGTH_LONG).show();
+                }
+
+
+
+
 
 
             } catch (JSONException e) {

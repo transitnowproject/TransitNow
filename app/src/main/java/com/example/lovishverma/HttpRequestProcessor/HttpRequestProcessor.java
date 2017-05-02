@@ -33,7 +33,7 @@ public class HttpRequestProcessor {
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            httpURLConnection.setRequestProperty("Content-Type", "Application/json");
             httpURLConnection.setReadTimeout(15000); // Timeout on waiting to read data
             httpURLConnection.setConnectTimeout(15000); //Timeout in making the initial connection
             OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream());
