@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="500dp"
         app:backgroundTint="@color/input_login_hint"
         app:srcCompat="@drawable/location" />
 
@@ -51,15 +51,7 @@
             android:textStyle="bold"
             android:typeface="sans" />
 
-        <Button
-            android:id="@+id/btnListedMembers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="listed members"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:typeface="sans" />
+
 
         <Button
             android:id="@+id/btnSaveLoc"

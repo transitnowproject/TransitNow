@@ -1,10 +1,16 @@
 package com.example.lovishverma.transitnow;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
@@ -29,18 +35,26 @@ import com.example.lovishverma.fragments.MyLocFragment;
 import com.example.lovishverma.fragments.NearestStopFragment;
 import com.example.lovishverma.fragments.SetReminderFragment;
 import com.example.lovishverma.fragments.ShareFragment;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener {
 
     SupportMapFragment sMapFragment;
-    private Button btnSaveLoc,btnSignOut,btnShowLoc,btnListedMembers;
+    private Button btnSaveLoc,btnSignOut,btnShowLoc;
+    private GoogleApiClient googleApiClient;
     private HttpRequestProcessor httpRequestProcessor;
     private Response response;
     private ApiConfiguration apiConfiguration;
@@ -50,6 +64,9 @@ public class DashboardActivity extends AppCompatActivity
     private boolean success;
     private String MemberId,Title,Description,DDate,Longitude,Latitude,Place;
     private String message;
+    private double latitude, longitude;
+    private LatLng latLng;
+    private GoogleMap mMap;
 
 
 
@@ -62,7 +79,46 @@ public class DashboardActivity extends AppCompatActivity
         btnSaveLoc= (Button) findViewById(R.id.btnSaveLoc);
         btnShowLoc= (Button) findViewById(R.id.btnShowLoc);
         btnSignOut= (Button) findViewById(R.id.btnSignOut);
-        btnListedMembers= (Button) findViewById(R.id.btnListedMembers);
+
+
+        // Obtain the SupportMapFragment and get notified when the map
+        //is ready to be used.
+//        sMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+//       sMapFragment.getMapAsync(this);
+        //sMapFragment.getMapAsync((OnMapReadyCallback) this);
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        btnShowLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.clear();
+
+                //Creating a location object
+                if (ActivityCompat.checkSelfPermission(DashboardActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DashboardActivity.this,
+                                Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                Location location =
+                        LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+
+                //Moving the map to location
+                moveMap();
+
+            }
+        });
+
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,13 +141,6 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        btnListedMembers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this,MemberListedActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -100,6 +149,24 @@ public class DashboardActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                mMap.clear();
+
+                //Creating a location object
+                if (ActivityCompat.checkSelfPermission(DashboardActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DashboardActivity.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                Location location =
+                        LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+
+                //Moving the map to location
+                moveMap();
             }
         });
 
@@ -119,6 +186,62 @@ public class DashboardActivity extends AppCompatActivity
 
 
         sMapFragment.getMapAsync(this);
+
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //Add locations and markers here
+        mMap = googleMap;
+
+        // Add a marker in Chandigarh and move the camera
+        LatLng chd = new LatLng(30, 76);
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                mMap.clear();
+                mMap.addMarker(new
+                        MarkerOptions().position(latLng).title("hello"));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
+        });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                return true;
+            }
+        });
+        mMap.addMarker(new MarkerOptions().position(chd).title("hello"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(chd));
+    }
+    public void moveMap() {
+
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        //Adding marker
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("Current Location").draggable(true));
+
+        //Moving the camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        //Animating the camera
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(50));
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
@@ -276,8 +399,5 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        //Add locations and markers here
-    }
+
 }

@@ -6,6 +6,8 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,11 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity" />
         <activity android:name=".StartActivity" />
-        <activity android:name=".AreYouActivity" />
         <activity android:name=".TabActivity" />
         <activity
             android:name=".DashboardActivity"
@@ -41,13 +40,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCS1oAW9Hj5afCP98h_X0JijCuoO-GNzQU" />
 
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".AssocMemActivity" />
-        <activity android:name=".DriverActivity" />
         <activity android:name=".DriverDashboard" />
-        <activity android:name="com.example.lovishverma.fragments.DriverFragment1" />
-        <activity android:name="com.example.lovishverma.fragments.DriverFragment2" />
-        <activity android:name=".MemberListedActivity"></activity>
+        <activity android:name=".MemberListedActivity" />
+        <activity android:name=".LocationActivity"></activity>
     </application>
 
 </manifest>

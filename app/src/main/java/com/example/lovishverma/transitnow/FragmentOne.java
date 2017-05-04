@@ -1,15 +1,24 @@
 package com.example.lovishverma.transitnow;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.lovishverma.APIConfiguration.ApiConfiguration;
+import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
+import com.example.lovishverma.HttpRequestProcessor.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +30,14 @@ import java.util.regex.Pattern;
 public class FragmentOne extends android.support.v4.app.Fragment {
 
     private Button btnLogin, btnForgotPassword;
-    private EditText edtEmail,edtPassword;
+    private EditText edtEmailId,edtPassword;
+    private String UserName, Password;
+    private HttpRequestProcessor httpRequestProcessor;
+    private Response response;
+    private ApiConfiguration apiConfiguration;
+    private String baseURL, urlLogin, jsonStringToPost, jsonResponseString;
+    private boolean success;
+    private String ErrorMessage;
 
 
     @Nullable
@@ -29,19 +45,33 @@ public class FragmentOne extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_one, container, false);
 
-        edtEmail = (EditText) view.findViewById(R.id.email);
-        edtPassword = (EditText) view.findViewById(R.id.password);
-        btnLogin = (Button) view.findViewById(R.id.login);
-        btnForgotPassword = (Button) view.findViewById(R.id.forgotPassword);
+        edtEmailId = (EditText) view.findViewById(R.id.edtEmailId);
+        edtPassword = (EditText) view.findViewById(R.id.edtPassword);
+        btnLogin = (Button) view.findViewById(R.id.btnLogin);
+        btnForgotPassword = (Button) view.findViewById(R.id.btnForgotPassword);
+
+        //Initialization
+        httpRequestProcessor = new HttpRequestProcessor();
+        response = new Response();
+        apiConfiguration = new ApiConfiguration();
+
+        //Getting base url
+        baseURL = apiConfiguration.getApi();
+        urlLogin = baseURL + "AccountAPI/GetLoginUser";
+        Log.e("url", urlLogin);
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final String email = edtEmail.getText().toString();
-                if (!isValidEmail(email)) {
-                    edtEmail.setError("Invalid Email");
+
+                UserName = edtEmailId.getText().toString();
+                Password = edtPassword.getText().toString();
+                new LoginTask().execute(UserName, Password);
+                if (!isValidEmail(UserName)) {
+                    edtEmailId.setError("Invalid Email");
                 }
                 final String password = edtPassword.getText().toString();
                 if (!isValidPassword(password)) {
@@ -53,8 +83,8 @@ public class FragmentOne extends android.support.v4.app.Fragment {
                     edtPassword.setError("Password contains atleast 6 characters");
                 }
 
-                Intent intent= new Intent(getActivity(),DashboardActivity.class);
-                startActivity(intent);
+//                Intent intent= new Intent(getActivity(),DashboardActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -96,7 +126,67 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         return false;
 
     }
+    public class LoginTask extends AsyncTask<String, String, String> {
 
 
-    }
+        @Override
+        protected String doInBackground(String... params) {
+            UserName = params[0];
+            Password = params[1];
+
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("UserName", UserName);
+                jsonObject.put("Password", Password);
+
+                jsonStringToPost = jsonObject.toString();
+                response = httpRequestProcessor.pOSTRequestProcessor(jsonStringToPost, urlLogin);
+                jsonResponseString = response.getJsonResponseString();
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonResponseString;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            //Log.d("Response String", s);
+
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                success = jsonObject.getBoolean("success");
+                Log.d("Success", String.valueOf(success));
+                ErrorMessage = jsonObject.getString("ErrorMessage");
+                Log.d("ErrorMessage", ErrorMessage);
+
+                if(ErrorMessage.equals("User Authenticated!!"))
+                {
+                    Toast.makeText(getActivity(),"success",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getActivity(),DashboardActivity.class));
+                }
+                else if(ErrorMessage.equals("Invalid username!!"))
+                {
+                    Toast.makeText(getActivity(),"Enter Valid UserName",Toast.LENGTH_LONG).show();
+                }
+                else if(ErrorMessage.equals("Invalid password!!"))
+                {
+                    Toast.makeText(getActivity(),"Enter Valid Password",Toast.LENGTH_LONG).show();
+                }
+
+
+
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+    }}
 

@@ -15,7 +15,6 @@ import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
-        btnForgotPassword = (Button) findViewById(R.id.forgotPassword);
+        btnForgotPassword = (Button) findViewById(R.id.btnForgotPassword);
 
         //Initialization
         httpRequestProcessor = new HttpRequestProcessor();

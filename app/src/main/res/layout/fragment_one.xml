@@ -15,7 +15,7 @@
         android:paddingRight="20dp">
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/edtEmailId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -28,7 +28,7 @@
             android:textColorHint="@color/input_login_hint" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -43,7 +43,7 @@
         <!-- Login Button -->
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -54,7 +54,7 @@
         <!--&lt;!&ndash; Link to Login Screen &ndash;&gt;-->
 
         <Button
-            android:id="@+id/forgotPassword"
+            android:id="@+id/btnForgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
