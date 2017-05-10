@@ -1,3 +1,4 @@
+
 package com.example.lovishverma.transitnow;
 
 import android.Manifest;
@@ -29,6 +30,7 @@ import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
 import com.example.lovishverma.fragments.BusLocFragment;
+import com.example.lovishverma.fragments.DistanceCalculatorFragment;
 import com.example.lovishverma.fragments.ListedMembersFragment;
 import com.example.lovishverma.fragments.InviteFriendFragment;
 import com.example.lovishverma.fragments.MyLocFragment;
@@ -50,10 +52,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    SupportMapFragment sMapFragment;
-    private Button btnSaveLoc,btnSignOut,btnShowLoc;
+    SupportMapFragment sMapFragment, mapFragment;
+    private Button btnSaveLoc, btnSignOut, btnShowLoc;
     private GoogleApiClient googleApiClient;
     private HttpRequestProcessor httpRequestProcessor;
     private Response response;
@@ -62,12 +64,11 @@ public class DashboardActivity extends AppCompatActivity
     private String jsonPostString, jsonResponseString;
     private int responseData;
     private boolean success;
-    private String MemberId,Title,Description,DDate,Longitude,Latitude,Place;
+    private String MemberId, Title, Description, DDate, Longitude, Latitude, Place;
     private String message;
     private double latitude, longitude;
     private LatLng latLng;
     private GoogleMap mMap;
-
 
 
     @Override
@@ -76,9 +77,12 @@ public class DashboardActivity extends AppCompatActivity
         sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_dashboard);
 
-        btnSaveLoc= (Button) findViewById(R.id.btnSaveLoc);
-        btnShowLoc= (Button) findViewById(R.id.btnShowLoc);
-        btnSignOut= (Button) findViewById(R.id.btnSignOut);
+//        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+
+        btnSaveLoc = (Button) findViewById(R.id.btnSaveLoc);
+        btnShowLoc = (Button) findViewById(R.id.btnShowLoc);
+        btnSignOut = (Button) findViewById(R.id.btnSignOut);
 
 
         // Obtain the SupportMapFragment and get notified when the map
@@ -93,69 +97,68 @@ public class DashboardActivity extends AppCompatActivity
                 .addApi(LocationServices.API)
                 .build();
 
-        btnShowLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMap.clear();
-
-                //Creating a location object
-                if (ActivityCompat.checkSelfPermission(DashboardActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) !=
-                        PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DashboardActivity.this,
-                                Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                Location location =
-                        LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-                if (location != null) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                }
-
-                //Moving the map to location
-                moveMap();
-
-            }
-        });
-
-
+//        btnShowLoc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mMap.clear();
+//
+//                //Creating a location object
+//                if (ActivityCompat.checkSelfPermission(DashboardActivity.this,
+//                        Manifest.permission.ACCESS_FINE_LOCATION) !=
+//                        PackageManager.PERMISSION_GRANTED
+//                        &&
+//                        ActivityCompat.checkSelfPermission(DashboardActivity.this,
+//                                Manifest.permission.ACCESS_COARSE_LOCATION)
+//                                != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+//                Location location =
+//                        LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+//                if (location != null) {
+//                    latitude = location.getLatitude();
+//                    longitude = location.getLongitude();
+//                }
+//
+//                //Moving the map to location
+//                moveMap();
+//            }
+//        });
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Initialization
-        httpRequestProcessor = new HttpRequestProcessor();
-        response = new Response();
-        apiConfiguration = new ApiConfiguration();
-
-        //Getting BaseURL
-        baseURL = apiConfiguration.getApi();
-        urlRegister = baseURL + "TrackMyPosition/SaveMyCurrentPosition";
-        Log.e("url", urlRegister);
-
-        btnSaveLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new RegistrationTask().execute(MemberId,Title,Description,DDate,Longitude,Latitude,Place);
-
-            }
-        });
-
+//        //Initialization
+//        httpRequestProcessor = new HttpRequestProcessor();
+//        response = new Response();
+//        apiConfiguration = new ApiConfiguration();
+//
+//        //Getting BaseURL
+//        baseURL = apiConfiguration.getApi();
+//        urlRegister = baseURL + "TrackMyPosition/SaveMyCurrentPosition";
+//        Log.e("url", urlRegister);
+//
+//        btnSaveLoc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new RegistrationTask().execute(MemberId, Title, Description, DDate, Longitude, Latitude, Place);
+//
+//            }
+//        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "CURRENT LOCATION", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 mMap.clear();
 
                 //Creating a location object
-                if (ActivityCompat.checkSelfPermission(DashboardActivity.this,Manifest.permission.ACCESS_FINE_LOCATION) !=
+                if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DashboardActivity.this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 Location location =
@@ -167,6 +170,7 @@ public class DashboardActivity extends AppCompatActivity
 
                 //Moving the map to location
                 moveMap();
+                Toast.makeText(DashboardActivity.this,"Button clicked",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -183,11 +187,30 @@ public class DashboardActivity extends AppCompatActivity
 //        fm.beginTransaction().replace(R.id.content_frame, new MapFragment()).commit();
         android.support.v4.app.FragmentManager sFm = getSupportFragmentManager();
         sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
-
-
         sMapFragment.getMapAsync(this);
 
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, TabActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        googleApiClient.disconnect();
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         //Add locations and markers here
@@ -214,6 +237,7 @@ public class DashboardActivity extends AppCompatActivity
         mMap.addMarker(new MarkerOptions().position(chd).title("hello"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(chd));
     }
+
     public void moveMap() {
 
         LatLng latLng = new LatLng(latitude, longitude);
@@ -245,74 +269,73 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    private class RegistrationTask extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            MemberId = params[0];
-            Title = params[1];
-            Description = params[2];
-            DDate = params[3];
-            Longitude = params[4];
-            Latitude = params[5];
-            Place = params[6];
+//    private class RegistrationTask extends AsyncTask<String, String, String> {
+//        @Override
+//        protected String doInBackground(String... params) {
+//            MemberId = params[0];
+//            Title = params[1];
+//            Description = params[2];
+//            DDate = params[3];
+//            Longitude = params[4];
+//            Latitude = params[5];
+//            Place = params[6];
+//
+//            JSONObject jsonObject = new JSONObject();
+//            try {
+//                jsonObject.put("MemberId", MemberId);
+//                jsonObject.put("Title", Title);
+//                jsonObject.put("Description", Description);
+//                jsonObject.put("DDate", DDate);
+//                jsonObject.put("Longitude", Longitude);
+//                jsonObject.put("Latitude", Latitude);
+//                jsonObject.put("Place", Place);
+//
+//
+//                jsonPostString = jsonObject.toString();
+//                Log.e("jsonPostString", jsonPostString);
+//                response = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, urlRegister);
+//                jsonResponseString = response.getJsonResponseString();
+//                Log.e("jsonResponseString", jsonResponseString);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            return jsonResponseString;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//            // Log.d("Response String", s);
+//
+//            try {
+//                JSONObject jsonObject = new JSONObject(s);
+//                success = jsonObject.getBoolean("success");
+//                Log.d("Success", String.valueOf(success));
+//
+//                responseData = jsonObject.getInt("responseData");
+//                // Log.d("message", message);
+//                message = jsonObject.getString("message");
+//                Log.d("message", message);
+//
+//
+//                if (responseData == 1) {
+//                    Toast.makeText(DashboardActivity.this, "Records saved successfully !!", Toast.LENGTH_LONG).show();
+////                    Intent intent = new Intent(getActivity(), FragmentOne.class);
+////                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(DashboardActivity.this, "Records Saved Unsuccessfully", Toast.LENGTH_LONG).show();
+//                }
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        }
+//    }
 
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("MemberId", MemberId);
-                jsonObject.put("Title", Title);
-                jsonObject.put("Description", Description);
-                jsonObject.put("DDate", DDate);
-                jsonObject.put("Longitude", Longitude);
-                jsonObject.put("Latitude", Latitude);
-                jsonObject.put("Place", Place);
-
-
-                jsonPostString = jsonObject.toString();
-                Log.e("jsonPostString", jsonPostString);
-                response = httpRequestProcessor.pOSTRequestProcessor(jsonPostString, urlRegister);
-                jsonResponseString = response.getJsonResponseString();
-                Log.e("jsonResponseString", jsonResponseString);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return jsonResponseString;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            // Log.d("Response String", s);
-
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                success = jsonObject.getBoolean("success");
-                Log.d("Success", String.valueOf(success));
-
-                responseData = jsonObject.getInt("responseData");
-                // Log.d("message", message);
-                message = jsonObject.getString("message");
-                Log.d("message", message);
-
-
-
-
-                if (responseData == 1) {
-                    Toast.makeText(DashboardActivity.this, "Records saved successfully !!", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getActivity(), FragmentOne.class);
-//                    startActivity(intent);
-                } else {
-                    Toast.makeText(DashboardActivity.this, "Records Saved Unsuccessfully", Toast.LENGTH_LONG).show();
-                }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -364,7 +387,7 @@ public class DashboardActivity extends AppCompatActivity
 
 
         if (id == R.id.navNormalMap) {
-           // fm.beginTransaction().replace(R.id.content_frame, new MapFragment()).commit();
+            // fm.beginTransaction().replace(R.id.content_frame, new MapFragment()).commit();
 
             if (!sMapFragment.isAdded())
                 sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
@@ -379,15 +402,16 @@ public class DashboardActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_frame, new MyLocFragment()).commit();
 
         } else if (id == R.id.navBusLoc) {
+
             fm.beginTransaction().replace(R.id.content_frame, new BusLocFragment()).commit();
 
         } else if (id == R.id.navBusStop) {
             fm.beginTransaction().replace(R.id.content_frame, new NearestStopFragment()).commit();
-        }
-        else if (id == R.id.navReminder) {
+        } else if (id == R.id.navReminder) {
             fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
-        }
-        else if (id == R.id.navAboutUs) {
+        } else if (id == R.id.navCalculator) {
+            fm.beginTransaction().replace(R.id.content_frame, new DistanceCalculatorFragment()).commit();
+        } else if (id == R.id.navAboutUs) {
             fm.beginTransaction().replace(R.id.content_frame, new ShareFragment()).commit();
 
         } else if (id == R.id.navRateUs) {

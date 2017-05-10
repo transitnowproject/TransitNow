@@ -1,6 +1,8 @@
 package com.example.lovishverma.transitnow;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,15 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
+import com.example.lovishverma.sharedPreferences.MyPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.jar.Attributes;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,6 +43,10 @@ public class FragmentOne extends android.support.v4.app.Fragment {
     private String baseURL, urlLogin, jsonStringToPost, jsonResponseString;
     private boolean success;
     private String ErrorMessage;
+    private int logID;
+    private String name,mobileNo,applicationUserID;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
 
     @Nullable
@@ -67,21 +76,39 @@ public class FragmentOne extends android.support.v4.app.Fragment {
             public void onClick(View v) {
 
 
-                UserName = edtEmailId.getText().toString();
-                Password = edtPassword.getText().toString();
-                new LoginTask().execute(UserName, Password);
-                if (!isValidEmail(UserName)) {
-                    edtEmailId.setError("Invalid Email");
+
+
+                if (edtEmailId.getText().toString().trim().length() == 0) {
+                    edtEmailId.setError("Username is not entered");
+                    edtEmailId.requestFocus();
                 }
-                final String password = edtPassword.getText().toString();
-                if (!isValidPassword(password)) {
-                    edtPassword.setError("Invalid Password");
+                if (edtPassword.getText().toString().trim().length() == 0) {
+                    edtPassword.setError("Password is not entered");
+                    edtPassword.requestFocus();
                 }
-                final String pass = edtPassword.getText().toString();
-                if(!isPassword(pass))
+                else
                 {
-                    edtPassword.setError("Password contains atleast 6 characters");
+                    UserName = edtEmailId.getText().toString();
+                    Password = edtPassword.getText().toString();
+
+                    new LoginTask().execute(UserName, Password);
                 }
+
+
+
+
+//                if (!isValidEmail(UserName)) {
+//                    edtEmailId.setError("Invalid Email");
+//                }
+//                final String password = edtPassword.getText().toString();
+//                if (!isValidPassword(password)) {
+//                    edtPassword.setError("Invalid Password");
+//                }
+//                final String pass = edtPassword.getText().toString();
+//                if(!isPassword(pass))
+//                {
+//                    edtPassword.setError("Password contains atleast 6 characters");
+//                }
 
 //                Intent intent= new Intent(getActivity(),DashboardActivity.class);
 //                startActivity(intent);
@@ -100,32 +127,32 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 
     }
 
-    private boolean isValidEmail(String email) {
-
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-
-
-    }
-
-    private boolean isValidPassword(String password) {
-        if (password != null) {
-            return true;
-        }
-        return false;
-
-    }
-    private boolean isPassword(String pass) {
-        if (pass.length() == 6 && pass.length() >6) {
-            return true;
-        }
-        return false;
-
-    }
+//    private boolean isValidEmail(String email) {
+//
+//        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//
+//        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+//        Matcher matcher = pattern.matcher(email);
+//        return matcher.matches();
+//
+//
+//    }
+//
+//    private boolean isValidPassword(String password) {
+//        if (password != null) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
+//    private boolean isPassword(String pass) {
+//        if (pass.length() == 6 && pass.length() >6) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
     public class LoginTask extends AsyncTask<String, String, String> {
 
 
@@ -164,16 +191,32 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 
                 if(ErrorMessage.equals("User Authenticated!!"))
                 {
-                    Toast.makeText(getActivity(),"success",Toast.LENGTH_LONG).show();
+                    name = jsonObject.getString("Name");
+                    mobileNo = jsonObject.getString("MobileNo");
+                    applicationUserID = jsonObject.getString("ApplicationUserId");
+
+
+                    sharedPreferences = getActivity().getSharedPreferences(MyPref.Pref_Name, Context.MODE_PRIVATE);
+//                    loggedInUserID = sharedPreferences.getString(MyPref.LoggedInUserID,null);
+//                    logID = Integer.parseInt(loggedInUserID);
+                    editor = sharedPreferences.edit();
+                    editor.putString(MyPref.UserName,name);
+                    editor.putString(MyPref.MobileNo,mobileNo);
+                    editor.putString(MyPref.LoggedInUserID,applicationUserID);
+                    editor.commit();
+
+
+
+                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getActivity(),DashboardActivity.class));
                 }
                 else if(ErrorMessage.equals("Invalid username!!"))
                 {
-                    Toast.makeText(getActivity(),"Enter Valid UserName",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
                 }
                 else if(ErrorMessage.equals("Invalid password!!"))
                 {
-                    Toast.makeText(getActivity(),"Enter Valid Password",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
                 }
 
 

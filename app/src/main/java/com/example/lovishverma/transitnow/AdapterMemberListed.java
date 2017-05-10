@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class AdapterMemberListed extends BaseAdapter {
 
-    private String name, mobileNo,memberId;
+    private String name, mobileNo, memberId;
     private Context context;
     private ArrayList<Member> arrayList;
     private LayoutInflater inflater;
@@ -28,7 +28,6 @@ public class AdapterMemberListed extends BaseAdapter {
         this.context = context;
         this.arrayList = arrayList;
     }
-
 
 
     @Override
@@ -48,11 +47,11 @@ public class AdapterMemberListed extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView = inflater.inflate(R.layout.member,parent,false);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflater.inflate(R.layout.member, parent, false);
 
-        TextView txtName= (TextView) convertView.findViewById(R.id.txtName);
-        TextView txtMobileNo= (TextView) convertView.findViewById(R.id.txtMobileNo);
+        TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
+        TextView txtMobileNo = (TextView) convertView.findViewById(R.id.txtMobileNo);
 
         Member member = arrayList.get(position);
 
@@ -60,6 +59,9 @@ public class AdapterMemberListed extends BaseAdapter {
         mobileNo = member.getMobileNo();
         int mId = member.getMemberId();
         memberId = String.valueOf(mId);
+
+        txtName.setText(name);
+        txtMobileNo.setText(mobileNo);
 
         return convertView;
     }

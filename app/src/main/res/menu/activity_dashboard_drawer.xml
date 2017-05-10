@@ -26,6 +26,10 @@
             android:id="@+id/navReminder"
             android:icon="@drawable/reminder"
             android:title="Set Reminder" />
+        <item
+            android:id="@+id/navCalculator"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Distance Calculator" />
     </group>
 
     <item android:title="Communicate">
