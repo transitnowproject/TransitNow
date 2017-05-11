@@ -11,4 +11,9 @@
         android:title="My Profile">
 
     </item>
+    <item
+        android:id="@+id/sign_out"
+        android:title="Sign Out">
+
+    </item>
 </menu>

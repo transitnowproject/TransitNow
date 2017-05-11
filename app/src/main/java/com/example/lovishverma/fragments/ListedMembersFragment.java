@@ -18,7 +18,7 @@ import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
 import com.example.lovishverma.transitnow.AdapterMemberListed;
-import com.example.lovishverma.transitnow.DemoCalActivity;
+import com.example.lovishverma.transitnow.DistanceActivity;
 import com.example.lovishverma.transitnow.Member;
 import com.example.lovishverma.transitnow.R;
 
@@ -72,19 +72,23 @@ public class ListedMembersFragment extends Fragment implements AdapterView.OnIte
 
         adapterMemberListed = new AdapterMemberListed(getActivity(), arrayList);
         lv.setAdapter(adapterMemberListed);
+        lv.setOnItemClickListener(this);
         return v;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        Toast.makeText(getActivity(), "next activity", Toast.LENGTH_LONG).show();
+        Log.d("msg", "next activity ");
         member=arrayList.get(position);
         name=member.getName();
         int mID = member.getMemberId();
         Toast.makeText(getActivity(), name + " selected", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(getActivity(), DemoCalActivity.class);
-        i.putExtra("friendID", mID);
-        i.putExtra("name",name);
+        Intent i = new Intent(getActivity(), DistanceActivity.class);
+        i.putExtra("MemberId", mID);
+//        i.putExtra("name",name);
+//        i.putExtra("MobileNo",mobileNo);
 
         startActivity(i);
 

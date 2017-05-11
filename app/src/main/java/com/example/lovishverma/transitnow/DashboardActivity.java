@@ -5,7 +5,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +28,6 @@ import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
 import com.example.lovishverma.fragments.BusLocFragment;
-import com.example.lovishverma.fragments.DistanceCalculatorFragment;
 import com.example.lovishverma.fragments.ListedMembersFragment;
 import com.example.lovishverma.fragments.InviteFriendFragment;
 import com.example.lovishverma.fragments.MyLocFragment;
@@ -47,9 +44,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -368,6 +362,11 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.my_profile) {
             return true;
         }
+        if (id == R.id.sign_out) {
+            Intent intent = new Intent(DashboardActivity.this,TabActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -409,9 +408,7 @@ public class DashboardActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_frame, new NearestStopFragment()).commit();
         } else if (id == R.id.navReminder) {
             fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
-        } else if (id == R.id.navCalculator) {
-            fm.beginTransaction().replace(R.id.content_frame, new DistanceCalculatorFragment()).commit();
-        } else if (id == R.id.navAboutUs) {
+        }else if (id == R.id.navAboutUs) {
             fm.beginTransaction().replace(R.id.content_frame, new ShareFragment()).commit();
 
         } else if (id == R.id.navRateUs) {
