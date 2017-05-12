@@ -41,37 +41,37 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
-        <Button
-            android:id="@+id/btnShowLoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="Show loc"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:typeface="sans" />
+        <!--<Button-->
+            <!--android:id="@+id/btnShowLoc"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:text="Show loc"-->
+            <!--android:textColor="@color/colorPrimaryDark"-->
+            <!--android:textStyle="bold"-->
+            <!--android:typeface="sans" />-->
 
 
 
         <Button
             android:id="@+id/btnSaveLoc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="save loc"
+            android:text="save current location"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:typeface="sans" />
 
-        <Button
-            android:id="@+id/btnSignOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="SignOut"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:typeface="sans" />
+        <!--<Button-->
+            <!--android:id="@+id/btnSignOut"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:text="SignOut"-->
+            <!--android:textColor="@color/colorPrimaryDark"-->
+            <!--android:textStyle="bold"-->
+            <!--android:typeface="sans" />-->
     </android.support.v7.widget.Toolbar>
 
 

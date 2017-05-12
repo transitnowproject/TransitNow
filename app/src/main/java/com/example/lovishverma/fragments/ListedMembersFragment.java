@@ -1,5 +1,6 @@
 package com.example.lovishverma.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.lovishverma.APIConfiguration.ApiConfiguration;
 import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
 import com.example.lovishverma.HttpRequestProcessor.Response;
+import com.example.lovishverma.sharedPreferences.MyPref;
 import com.example.lovishverma.transitnow.AdapterMemberListed;
 import com.example.lovishverma.transitnow.DistanceActivity;
 import com.example.lovishverma.transitnow.Member;
@@ -63,6 +65,10 @@ public class ListedMembersFragment extends Fragment implements AdapterView.OnIte
         response = new Response();
         apiConfiguration = new ApiConfiguration();
 
+//        sharedPreferences = getActivity().getSharedPreferences(MyPref.Pref_Name, Context.MODE_PRIVATE);
+//        loggedInUserID = sharedPreferences.getString(MyPref.LoggedInUserID, null);
+//        int logID = Integer.parseInt(loggedInUserID);
+
         //Getting BaseURL
         baseURL = apiConfiguration.getApi();
         urlRegister = baseURL + "MemberAPI/GetApplicationMemberList" ;
@@ -87,7 +93,7 @@ public class ListedMembersFragment extends Fragment implements AdapterView.OnIte
         Toast.makeText(getActivity(), name + " selected", Toast.LENGTH_LONG).show();
         Intent i = new Intent(getActivity(), DistanceActivity.class);
         i.putExtra("MemberId", mID);
-//        i.putExtra("name",name);
+        i.putExtra("name",name);
 //        i.putExtra("MobileNo",mobileNo);
 
         startActivity(i);

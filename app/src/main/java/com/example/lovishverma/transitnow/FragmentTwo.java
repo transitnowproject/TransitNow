@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,30 +77,30 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
 
-//                if (edtName.getText().toString().trim().length() == 0) {
-//                    edtName.setError("Name is not entered");
-//                    edtName.requestFocus();
-//                }
-//                if (edtAddress.getText().toString().trim().length() == 0){
-//                    edtAddress.setError("Address is not entered");
-//                    edtAddress.requestFocus();
-//                }
-//                if (edtEmailID.getText().toString().trim().length() == 0){
-//                    edtEmailID.setError("EmailId is not entered");
-//                    edtEmailID.requestFocus();
-//                }
-//                if (edtPhone.getText().toString().trim().length() == 0){
-//                    edtPhone.setError("Phone is not entered");
-//                    edtPhone.requestFocus();
-//                }
-//                if (edtUser.getText().toString().trim().length() == 0) {
-//                    edtUser.setError("Username is not entered");
-//                    edtUser.requestFocus();
-//                }
-//                if (edtPass.getText().toString().trim().length() == 0) {
-//                    edtPass.setError("Password is not entered");
-//                    edtPass.requestFocus();
-//                } else
+                if (edtName.getText().toString().trim().length() == 0) {
+                    edtName.setError("Name is not entered");
+                    edtName.requestFocus();
+                }
+                if (edtAddress.getText().toString().trim().length() == 0){
+                    edtAddress.setError("Address is not entered");
+                    edtAddress.requestFocus();
+                }
+                if (edtEmailId.getText().toString().trim().length() == 0){
+                    edtEmailId.setError("EmailId is not entered");
+                    edtEmailId.requestFocus();
+                }
+                if (edtMobileNo.getText().toString().trim().length() == 0){
+                    edtMobileNo.setError("Phone is not entered");
+                    edtMobileNo.requestFocus();
+                }
+                if (edtUserName.getText().toString().trim().length() == 0) {
+                    edtUserName.setError("Username is not entered");
+                    edtUserName.requestFocus();
+                }
+                if (edtPassword.getText().toString().trim().length() == 0) {
+                    edtPassword.setError("Password is not entered");
+                    edtPassword.requestFocus();
+                } else
                 //Getting values
                 Name = edtName.getText().toString();
                 Address = edtAddress.getText().toString();
@@ -190,6 +192,11 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
                 if (responseData == 1) {
                     Toast.makeText(getActivity(), "Data Registered Successfully", Toast.LENGTH_LONG).show();
+//                    FragmentTwo fragment = new FragmentTwo();
+//                    FragmentManager fm = getActivity().getSupportFragmentManager();
+//                    FragmentTransaction ft = fm.beginTransaction();
+//                    ft.replace(R.id.content_frame, fragment);
+//                    ft.commit();
 //                    Intent intent = new Intent(getActivity(), FragmentOne.class);
 //                    startActivity(intent);
                 } else {

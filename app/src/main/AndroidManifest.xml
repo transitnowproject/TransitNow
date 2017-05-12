@@ -42,7 +42,10 @@
 
         <activity android:name=".DriverDashboard" />
         <activity android:name=".LocationActivity" />
-        <activity android:name=".DistanceActivity"></activity>
+        <activity android:name=".DistanceActivity" />
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".RateActivity" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

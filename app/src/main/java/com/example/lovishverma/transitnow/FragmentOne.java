@@ -77,7 +77,6 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 
 
 
-
                 if (edtEmailId.getText().toString().trim().length() == 0) {
                     edtEmailId.setError("Username is not entered");
                     edtEmailId.requestFocus();
@@ -92,7 +91,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
                     Password = edtPassword.getText().toString();
 
                     new LoginTask().execute(UserName, Password);
-                }
+               }
 
 
 
@@ -109,7 +108,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 //                {
 //                    edtPassword.setError("Password contains atleast 6 characters");
 //                }
-
+//
 //                Intent intent= new Intent(getActivity(),DashboardActivity.class);
 //                startActivity(intent);
             }

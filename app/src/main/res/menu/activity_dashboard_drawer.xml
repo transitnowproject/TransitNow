@@ -10,10 +10,10 @@
             android:id="@+id/navListedMembers"
             android:icon="@drawable/traffic"
             android:title="Listed Members" />
-        <item
-            android:id="@+id/navLoc"
-            android:icon="@drawable/loc5"
-            android:title="My location" />
+        <!--<item-->
+            <!--android:id="@+id/navLoc"-->
+            <!--android:icon="@drawable/loc5"-->
+            <!--android:title="My location" />-->
         <item
             android:id="@+id/navBusLoc"
             android:icon="@drawable/bus_locc"
@@ -26,6 +26,10 @@
             android:id="@+id/navReminder"
             android:icon="@drawable/reminder"
             android:title="Set Reminder" />
+        <item
+            android:id="@+id/navDistanceCalculator"
+            android:icon="@drawable/reminder"
+            android:title="Distance Calculator" />
 
     </group>
 
