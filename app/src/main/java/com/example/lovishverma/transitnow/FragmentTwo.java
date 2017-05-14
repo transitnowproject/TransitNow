@@ -102,18 +102,20 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                     edtPassword.requestFocus();
                 } else
                 //Getting values
-                Name = edtName.getText().toString();
-                Address = edtAddress.getText().toString();
-                EmailId = edtEmailId.getText().toString();
-                MobileNo = edtMobileNo.getText().toString();
-                Option = radioGroup.getCheckedRadioButtonId();
-                Gender = String.valueOf(Option);
-                Log.e("Gender", Gender );
-                UserName = edtUserName.getText().toString();
-                Password = edtPassword.getText().toString();
-                new RegistrationTask().execute(Name, Address, EmailId, MobileNo, Gender, UserName, Password);
-                //Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_LONG).show();
-                reset();
+                {
+                    Name = edtName.getText().toString();
+                    Address = edtAddress.getText().toString();
+                    EmailId = edtEmailId.getText().toString();
+                    MobileNo = edtMobileNo.getText().toString();
+                    Option = radioGroup.getCheckedRadioButtonId();
+                    Gender = String.valueOf(Option);
+                    Log.e("Gender", Gender);
+                    UserName = edtUserName.getText().toString();
+                    Password = edtPassword.getText().toString();
+                    new RegistrationTask().execute(Name, Address, EmailId, MobileNo, Gender, UserName, Password);
+                    //Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_LONG).show();
+                    reset();
+                }
 
             }
         });

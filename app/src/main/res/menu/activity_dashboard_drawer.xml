@@ -17,15 +17,15 @@
         <item
             android:id="@+id/navBusLoc"
             android:icon="@drawable/bus_locc"
-            android:title="Bus Location" />
-        <item
-            android:id="@+id/navBusStop"
-            android:icon="@drawable/bus_stop"
-            android:title="Nearest Stop" />
-        <item
-            android:id="@+id/navReminder"
-            android:icon="@drawable/reminder"
-            android:title="Set Reminder" />
+            android:title="Track N Route" />
+        <!--<item-->
+            <!--android:id="@+id/navBusStop"-->
+            <!--android:icon="@drawable/bus_stop"-->
+            <!--android:title="Nearest Stop" />-->
+        <!--<item-->
+            <!--android:id="@+id/navReminder"-->
+            <!--android:icon="@drawable/reminder"-->
+            <!--android:title="Set Reminder" />-->
         <item
             android:id="@+id/navDistanceCalculator"
             android:icon="@drawable/reminder"
@@ -38,7 +38,7 @@
             <item
                 android:id="@+id/navAboutUs"
                 android:icon="@drawable/ic_menu_share"
-                android:title="About Us" />
+                android:title="About App" />
             <item
                 android:id="@+id/navRateUs"
                 android:icon="@drawable/ic_menu_send"

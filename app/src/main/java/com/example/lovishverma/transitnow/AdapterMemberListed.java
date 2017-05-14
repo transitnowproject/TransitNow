@@ -7,10 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.lovishverma.APIConfiguration.ApiConfiguration;
-import com.example.lovishverma.HttpRequestProcessor.HttpRequestProcessor;
-import com.example.lovishverma.HttpRequestProcessor.Response;
-
 import java.util.ArrayList;
 
 /**
@@ -19,7 +15,7 @@ import java.util.ArrayList;
 
 public class AdapterMemberListed extends BaseAdapter {
 
-    private String name, mobileNo, memberId;
+    private String name, memberId;
     private Context context;
     private ArrayList<Member> arrayList;
     private LayoutInflater inflater;
@@ -51,17 +47,19 @@ public class AdapterMemberListed extends BaseAdapter {
         convertView = inflater.inflate(R.layout.member, parent, false);
 
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
-        TextView txtMobileNo = (TextView) convertView.findViewById(R.id.txtMobileNo);
+        TextView txtMemberId = (TextView) convertView.findViewById(R.id.txtMemberId);
 
         Member member = arrayList.get(position);
 
         name = member.getName();
-        mobileNo = member.getMobileNo();
+      //  mobileNo = member.getMobileNo();
         int mId = member.getMemberId();
         memberId = String.valueOf(mId);
 
+
         txtName.setText(name);
-        txtMobileNo.setText(mobileNo);
+        txtMemberId.setText(memberId);
+      //  txtMobileNo.setText(mobileNo);
 
         return convertView;
     }

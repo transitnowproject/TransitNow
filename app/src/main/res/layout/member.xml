@@ -16,8 +16,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtMobileNo"
-        android:hint="MobileNo"
+        android:id="@+id/txtMemberId"
+        android:hint="MemberId"
         android:inputType="phone"
         android:textColorHint="@color/white"
         android:textColor="@color/white"

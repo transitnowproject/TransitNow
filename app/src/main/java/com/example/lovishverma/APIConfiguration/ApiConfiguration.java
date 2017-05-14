@@ -6,8 +6,8 @@ package com.example.lovishverma.APIConfiguration;
 
 public class ApiConfiguration {
 
-    private String api = "http://192.168.57.210:8088/API/";
-    private String imageURL = "http://192.168.57.210:8088/UserImages/";
+    private String api = "http://alertback.sfsd.sebizfinishingschool.com/API/";
+    private String imageURL = "http://alertback.sfsd.sebizfinishingschool.com/UserImages/";
 
     public String getApi() {
         return api;

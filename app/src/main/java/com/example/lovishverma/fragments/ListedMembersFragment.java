@@ -139,10 +139,10 @@ public class ListedMembersFragment extends Fragment implements AdapterView.OnIte
                     for (int i = 0; i < responseData.length(); i++) {
                         JSONObject object = responseData.getJSONObject(i);
                         name = object.getString("Name");
-                        mobileNo = object.getString("MobileNo");
+                      //  mobileNo = object.getString("MobileNo");
                         memberId = object.getInt("MemberId");
                         Log.d("MemberId", String.valueOf(memberId));
-                        member = new Member(name, mobileNo, memberId);
+                        member = new Member(name, memberId);
                         arrayList.add(member);
                     }
                     adapterMemberListed.notifyDataSetChanged();

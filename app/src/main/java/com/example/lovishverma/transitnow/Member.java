@@ -6,16 +6,16 @@ package com.example.lovishverma.transitnow;
 
 public class Member {
 
-    private String name,mobileNo;
+    private String name;
     private int memberId;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
-    }
+//    public void setMobileNo(String mobileNo) {
+//        this.mobileNo = mobileNo;
+//    }
 
     public void setMemberId(int memberId) {
         this.memberId = memberId;
@@ -26,18 +26,18 @@ public class Member {
         return name;
     }
 
-    public String getMobileNo() {
-        return mobileNo;
-    }
+//    public String getMobileNo() {
+//        return mobileNo;
+//    }
 
     public int getMemberId() {
         return memberId;
     }
 
-    public Member(String name, String mobileNo, int memberId) {
+    public Member(String name, int memberId) {
 
         this.name = name;
-        this.mobileNo = mobileNo;
+      //  this.mobileNo = mobileNo;
         this.memberId = memberId;
     }
 }

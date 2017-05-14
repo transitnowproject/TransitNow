@@ -52,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     SupportMapFragment sMapFragment, mapFragment;
-   private Button btnSaveLoc;
+ //  private Button btnSaveLoc;
     private GoogleApiClient googleApiClient;
     private HttpRequestProcessor httpRequestProcessor;
     private Response response;
@@ -74,7 +74,7 @@ public class DashboardActivity extends AppCompatActivity
         sMapFragment = SupportMapFragment.newInstance();
         setContentView(R.layout.activity_dashboard);
 
-        btnSaveLoc = (Button) findViewById(R.id.btnSaveLoc);
+       // btnSaveLoc = (Button) findViewById(R.id.btnSaveLoc);
 //        btnShowLoc = (Button) findViewById(R.id.btnShowLoc);
 //        btnSignOut = (Button) findViewById(R.id.btnSignOut);
 
@@ -110,14 +110,14 @@ public class DashboardActivity extends AppCompatActivity
         urlRegister = baseURL + "TrackMyPosition/SaveMyCurrentPosition";
         Log.e("url", urlRegister);
 
-        btnSaveLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCurrentLocation();
-                new SaveTask().execute(MemberId, Title, Description, DDate, Longitude, Latitude, Place);
-
-            }
-        });
+//        btnSaveLoc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               // getCurrentLocation();
+//                new SaveTask().execute(MemberId, Title, Description, DDate, Longitude, Latitude, Place);
+//
+//            }
+//        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -376,12 +376,17 @@ public class DashboardActivity extends AppCompatActivity
 //            fm.beginTransaction().replace(R.id.content_frame, new MyLocFragment()).commit();
         }else if (id == R.id.navBusLoc) {
 
-            fm.beginTransaction().replace(R.id.content_frame, new BusLocFragment()).commit();
+            //fm.beginTransaction().replace(R.id.content_frame, new BusLocFragment()).commit();
+            openApp1(DashboardActivity.this,"com.purvotara.airbnbmapexample");
+            if (!sMapFragment.isAdded())
+                sFm.beginTransaction().add(R.id.map, sMapFragment).commit();
+            else
+                sFm.beginTransaction().show(sMapFragment).commit();
 
-        } else if (id == R.id.navBusStop) {
-            fm.beginTransaction().replace(R.id.content_frame, new NearestStopFragment()).commit();
-        } else if (id == R.id.navReminder) {
-            fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
+//        } else if (id == R.id.navBusStop) {
+//            fm.beginTransaction().replace(R.id.content_frame, new NearestStopFragment()).commit();
+//        } else if (id == R.id.navReminder) {
+//            fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
         }
         else if (id == R.id.navDistanceCalculator) {
             //fm.beginTransaction().replace(R.id.content_frame, new SetReminderFragment()).commit();
@@ -426,6 +431,19 @@ public class DashboardActivity extends AppCompatActivity
 
         return true;
     }
+    public static boolean openApp1(Context context, String packageName)
+    {
+        PackageManager manager = context.getPackageManager();
+        Intent i = manager.getLaunchIntentForPackage(packageName);
+        if(i == null){
+            return false;}
+
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        context.startActivity(i);
+
+        return true;
+    }
+
 
 
 }

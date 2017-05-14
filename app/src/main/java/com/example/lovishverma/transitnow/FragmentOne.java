@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 public class FragmentOne extends android.support.v4.app.Fragment {
 
     private Button btnLogin, btnForgotPassword;
-    private EditText edtEmailId,edtPassword;
+    private EditText edtEmailId, edtPassword;
     private String UserName, Password;
     private HttpRequestProcessor httpRequestProcessor;
     private Response response;
@@ -44,7 +44,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
     private boolean success;
     private String ErrorMessage;
     private int logID;
-    private String name,mobileNo,applicationUserID;
+    private String name, mobileNo, address, emailId, applicationUserID;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -70,11 +70,9 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         Log.e("url", urlLogin);
 
 
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
                 if (edtEmailId.getText().toString().trim().length() == 0) {
@@ -84,16 +82,12 @@ public class FragmentOne extends android.support.v4.app.Fragment {
                 if (edtPassword.getText().toString().trim().length() == 0) {
                     edtPassword.setError("Password is not entered");
                     edtPassword.requestFocus();
-                }
-                else
-                {
+                } else {
                     UserName = edtEmailId.getText().toString();
                     Password = edtPassword.getText().toString();
 
                     new LoginTask().execute(UserName, Password);
-               }
-
-
+                }
 
 
 //                if (!isValidEmail(UserName)) {
@@ -126,7 +120,7 @@ public class FragmentOne extends android.support.v4.app.Fragment {
 
     }
 
-//    private boolean isValidEmail(String email) {
+    //    private boolean isValidEmail(String email) {
 //
 //        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 //                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -188,39 +182,33 @@ public class FragmentOne extends android.support.v4.app.Fragment {
                 ErrorMessage = jsonObject.getString("ErrorMessage");
                 Log.d("ErrorMessage", ErrorMessage);
 
-                if(ErrorMessage.equals("User Authenticated!!"))
-                {
+                if (ErrorMessage.equals("User Authenticated!!")) {
                     name = jsonObject.getString("Name");
                     mobileNo = jsonObject.getString("MobileNo");
                     applicationUserID = jsonObject.getString("ApplicationUserId");
+                    address = jsonObject.getString("Address");
+                    emailId = jsonObject.getString("EmailId");
 
 
                     sharedPreferences = getActivity().getSharedPreferences(MyPref.Pref_Name, Context.MODE_PRIVATE);
 //                    loggedInUserID = sharedPreferences.getString(MyPref.LoggedInUserID,null);
 //                    logID = Integer.parseInt(loggedInUserID);
                     editor = sharedPreferences.edit();
-                    editor.putString(MyPref.UserName,name);
-                    editor.putString(MyPref.MobileNo,mobileNo);
-                    editor.putString(MyPref.LoggedInUserID,applicationUserID);
+                    editor.putString(MyPref.UserName, name);
+                    editor.putString(MyPref.MobileNo, mobileNo);
+                    editor.putString(MyPref.Address, address);
+                    editor.putString(MyPref.EmailId, emailId);
+                    editor.putString(MyPref.LoggedInUserID, applicationUserID);
                     editor.commit();
 
 
-
-                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getActivity(),DashboardActivity.class));
+                    Toast.makeText(getActivity(), ErrorMessage, Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getActivity(), DashboardActivity.class));
+                } else if (ErrorMessage.equals("Invalid username!!")) {
+                    Toast.makeText(getActivity(), ErrorMessage, Toast.LENGTH_LONG).show();
+                } else if (ErrorMessage.equals("Invalid password!!")) {
+                    Toast.makeText(getActivity(), ErrorMessage, Toast.LENGTH_LONG).show();
                 }
-                else if(ErrorMessage.equals("Invalid username!!"))
-                {
-                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
-                }
-                else if(ErrorMessage.equals("Invalid password!!"))
-                {
-                    Toast.makeText(getActivity(),ErrorMessage,Toast.LENGTH_LONG).show();
-                }
-
-
-
-
 
 
             } catch (JSONException e) {
@@ -229,6 +217,6 @@ public class FragmentOne extends android.support.v4.app.Fragment {
         }
 
 
-
-    }}
+    }
+}
 
