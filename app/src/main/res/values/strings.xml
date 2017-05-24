@@ -29,4 +29,9 @@
         <item>Driver 4</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="Option">
+        <item>Driver</item>
+        <item>Passenger</item>
+    </string-array>
 </resources>

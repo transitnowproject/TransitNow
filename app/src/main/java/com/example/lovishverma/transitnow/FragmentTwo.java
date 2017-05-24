@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.lovishverma.APIConfiguration.ApiConfiguration;
@@ -45,6 +47,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
     private String jsonPostString, jsonResponseString;
     private int responseData;
     private boolean success;
+    private Spinner spinner;
 
     @Nullable
     @Override
@@ -61,6 +64,7 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
         edtMobileNo = (EditText) view.findViewById(R.id.edtMobileNo);
         edtUserName = (EditText) view.findViewById(R.id.edtUserName);
         edtPassword = (EditText) view.findViewById(R.id.edtPassword);
+        spinner = (Spinner) view.findViewById(R.id.spinner);
 
         //Initialization
         httpRequestProcessor = new HttpRequestProcessor();
@@ -81,15 +85,15 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
                     edtName.setError("Name is not entered");
                     edtName.requestFocus();
                 }
-                if (edtAddress.getText().toString().trim().length() == 0){
+                if (edtAddress.getText().toString().trim().length() == 0) {
                     edtAddress.setError("Address is not entered");
                     edtAddress.requestFocus();
                 }
-                if (edtEmailId.getText().toString().trim().length() == 0){
+                if (edtEmailId.getText().toString().trim().length() == 0) {
                     edtEmailId.setError("EmailId is not entered");
                     edtEmailId.requestFocus();
                 }
-                if (edtMobileNo.getText().toString().trim().length() == 0){
+                if (edtMobileNo.getText().toString().trim().length() == 0) {
                     edtMobileNo.setError("Phone is not entered");
                     edtMobileNo.requestFocus();
                 }
@@ -135,6 +139,12 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
             }
         });
+
+//        String []opt = getResources().getStringArray(R.array.Option);
+//        {
+//            ArrayAdapter<String> adp = new ArrayAdapter<String>(getActivity(),R.layout.mylayout,opt);
+//            spinner.setAdapter(adp);
+//        }
         return view;
     }
 
@@ -213,8 +223,8 @@ public class FragmentTwo extends android.support.v4.app.Fragment {
 
         }
     }
-    public void reset()
-    {
+
+    public void reset() {
         edtName.setText(" ");
         edtAddress.setText(" ");
         edtEmailId.setText(" ");

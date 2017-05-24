@@ -165,10 +165,13 @@ public class DashboardActivity extends AppCompatActivity
         if (ActivityCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DashboardActivity.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-           // return;
+                return;
         }
         Location location =
                 LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        Log.e("location ", String.valueOf(location));
+
         if (location != null) {
             latitude = location.getLatitude();
             longitude = location.getLongitude();

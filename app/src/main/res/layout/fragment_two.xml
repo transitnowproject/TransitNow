@@ -2,15 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_register"
-    >
+    android:background="@color/bg_register">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:padding="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +31,6 @@
                 android:padding="10dp"
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
-
 
 
             <EditText
@@ -76,25 +75,27 @@
                 android:textColorHint="@color/input_register_hint" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioGroup"
                 android:orientation="horizontal">
+
                 <RadioButton
+                    android:id="@+id/male"
                     android:layout_width="160dp"
                     android:layout_height="40dp"
-                    android:id="@+id/male"
-                    android:text="   Male"
                     android:background="@color/input_register_bg"
-                    android:textColor="@color/white"   />
+                    android:text="   Male"
+                    android:textColor="@color/white" />
+
                 <RadioButton
+                    android:id="@+id/female"
                     android:layout_width="160dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
-                    android:id="@+id/female"
-                    android:text="   Female"
                     android:background="@color/input_register_bg"
-                    android:textColor="@color/white"   />
+                    android:text="   Female"
+                    android:textColor="@color/white" />
 
             </RadioGroup>
 
@@ -106,12 +107,11 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/input_register_bg"
                 android:hint="Username"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="10dp"
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
-
 
 
             <EditText
@@ -127,6 +127,17 @@
                 android:textColor="@color/input_register"
                 android:textColorHint="@color/input_register_hint" />
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:background="@color/input_register_bg"
+                android:entries="@array/Option"
+
+                >
+
+            </Spinner>
+
             <!-- Login Button -->
 
             <Button
@@ -140,7 +151,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
